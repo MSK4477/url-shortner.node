@@ -45,7 +45,7 @@ userRouter.post("/register", async (req, res) => {
       expiresIn: "1d",
     });
 
-    const link = `http://localhost:5175/verify?token=${verifyToken}`;
+    const link = `http://localhost:5173/verify?token=${verifyToken}`;
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {

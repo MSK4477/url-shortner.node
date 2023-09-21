@@ -8,9 +8,6 @@ const urlRouter = express.Router();
 urlRouter.post("/short", async (req, res) => {
   const { origUrl } = req.body;
 
-  // Check if the provided URL is valid
-
-
   const urlId = nanoid();
   if (validateUrl(origUrl)) {
 
