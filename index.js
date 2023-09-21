@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cors())
 await dbToConnect()
 const corsOptions = {
-    origin: 'https://master--delightful-biscuit-e75381.netlify.app/', 
+    origin: 'https://master--delightful-biscuit-e75381.netlify.app', 
   };
   
   app.use(cors(corsOptions));
