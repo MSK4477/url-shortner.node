@@ -12,7 +12,7 @@ const userRouter = Router();
 
 userRouter.get("/", async (req, res) => {
   try {
-    const newUserData = User.find({});
+    const newUserData = await User.find({});
     res
       .status(200)
       .json({ message: "data fetched succesfully", data: newUserData });
