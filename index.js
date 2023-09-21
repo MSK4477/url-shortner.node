@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cors())
 await dbToConnect()
 const corsOptions = {
-    origin: 'http://localhost:5173', // Adjust this URL to match your React frontend's actual URL during development.
+    origin: 'https://master--delightful-biscuit-e75381.netlify.app', 
   };
   
   app.use(cors(corsOptions));
