@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 dotenv.config();
 const userRouter = Router();
 
+
 userRouter.get("/", async (req, res) => {
   try {
     const newUserData = User.find({});
