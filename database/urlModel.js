@@ -1,10 +1,10 @@
 import { model, Schema } from "mongoose";
 
 const UrlSchema = new Schema({
-  urlId: {
-    type: String,
-    required: true,
-  },
+  // urlId: {
+  //   type: String,
+  //   required: true,
+  // },
   origUrl: {
     type: String,
     required: true,
@@ -24,6 +24,6 @@ const UrlSchema = new Schema({
   },
 });
 
-const URL = model("Url", UrlSchema);
+const UrlModel = model("URL-CREATION", UrlSchema);
 
-export default URL;
+export default UrlModel;
