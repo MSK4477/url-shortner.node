@@ -10,8 +10,7 @@ urlRouter.post("/short", async (req, res) => {
 
   const urlId = nanoid();
   if (validateUrl(origUrl)) {
-console.log( nanoid());
-console.log("hello")
+
   try {
     let url = await UrlModel.findOne({ origUrl });
 
@@ -38,64 +37,46 @@ console.log("hello")
   res.status(400).json({message:'Invalid Original Url', code:0});
 }
 });
-urlRouter.post("/sh", async (req, res) =>{
 
-  const {origUrl} = req.body;
-
-  const url = new UrlModel ({ origUrl})
-await url.save()
+urlRouter.get("/short/:urlId", async (req, res) => {
+  const { urlId } = req.params;
+  const url = await UrlModel.findOne({urlId })
+ console.log(  "this is full data", url)
+ console.log("this is urlid bro", urlId)
+try{
+ res.status(200).json({UrlData:url});
+if (url) {
+url.clicks+=1
+await url.save();
+console.log(url)
+res.status(200).json({UrlData:url})
+  return res.redirect(url.origUrl);
+} 
+} catch (err) {
+if(!url){
+  res.status(404).json({message:"Not found", id:urlId});
+  console.log(err);
+}
+}
 })
-// urlRouter.post("/sh", async (req, res) => {
-//   const { origUrl } = req.body;
-//   try{
-//     const url = new UrlModel ({ origUrl }); 
-//     await url.save();
-//     res.status(200).json({message:"Success", data:""})
-//   }catch(err)
-// {
-//   console.error(err)
-// }
-// });
-
-// urlRouter.get("/short/:urlId", async (req, res) => {
-//   const { urlId } = req.params;
-//   const url = await UrlModel.findOne({urlId:urlId })
+urlRouter.get("/short", async (req, res) => {
+  const url = await UrlModel.find({})
  
-// try{
-//  res.status(200).json({UrlData:url});
+try{
+ res.status(200).json({UrlData:url});
 
-// if (url) {
-// url.clicks+=1
-// await url.save();
-// // console.log(url)
-// res.status(200).json({UrlData:url})
-//   return res.redirect(url.origUrl);
-// } 
-// } catch (err) {
-// if(!url){
-//   res.status(404).json("Not found");
-//   console.log(err);
-// }
-// }
-// })
-// urlRouter.get("/short", async (req, res) => {
-//   const url = await UrlModel.find({})
- 
-// try{
-//  res.status(200).json({UrlData:url});
+if (url) {
 
-// if (url) {
-
-// res.status(200).json({UrlData:url})
-// } 
-// } catch (err) {
-// if(!url){
-//   res.status(404).json("Not found");
-//   console.log(err);
+res.status(200).json({UrlData:url})
+} 
+} catch (err) {
+if(!url){
+  res.status(404).json("Not found");
+  console.log(err);
   
-// }
-// }
-// })
+}
+}
+})
 
 
 

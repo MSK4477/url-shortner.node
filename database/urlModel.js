@@ -1,10 +1,10 @@
 import { model, Schema } from "mongoose";
 
 const UrlSchema = new Schema({
-  // urlId: {
-  //   type: String,
-  //   required: true,
-  // },
+  urlId: {
+    type: String,
+    required: true,
+  },
   origUrl: {
     type: String,
     required: true,
