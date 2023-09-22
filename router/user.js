@@ -26,7 +26,7 @@ userRouter.post("/register", async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const isUserExist = await User.findOne({ email: email });
-
+console.log(email,isUserExist)
     if (isUserExist) {
       res.status(409).json({ message: "User already exists" });
       return;
@@ -41,7 +41,7 @@ userRouter.post("/register", async (req, res) => {
 
     await newUserData.save();
 
-    const verifyToken = jwt.sign({ email: email }, process.env.SECRET_KEY, {
+    const verifyToken = jwt.sign({ email: email },  "jwt_secret_key", {
       expiresIn: "1d",
     });
 

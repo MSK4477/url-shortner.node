@@ -8,14 +8,13 @@ app.use(express.json())
 app.use(cors())
 await dbToConnect()
 const corsOptions = {
-    origin: 'http://localhost:5173', 
-  };
+    origin: 'http://localhost:5173',  };
   
   app.use(cors(corsOptions));
 
 app.use("/api/users", userRouter)
 app.use("/api/url", urlRouter)
-const PORT = 3000
+const PORT =  3000
 
 
 app.get("/", (req, res) =>{
