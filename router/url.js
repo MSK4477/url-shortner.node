@@ -17,7 +17,7 @@ urlRouter.post("/short", async (req, res) => {
     if (url) {      
       res.json(url);
     } else {
-      const shortUrl = `http://localhost:5173/rd/${urlId}`;
+      const shortUrl = `https://delightful-biscuit-e75381.netlify.app/rd/${urlId}`;
 
       url = new UrlModel({
         origUrl,

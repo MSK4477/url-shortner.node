@@ -45,7 +45,7 @@ console.log(email,isUserExist)
       expiresIn: "1d",
     });
 
-    const link = `http://localhost:5173/verify?token=${verifyToken}`;
+    const link = `https://delightful-biscuit-e75381.netlify.app/verify?token=${verifyToken}`;
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -165,7 +165,7 @@ userRouter.post("/forgotPassword", async (req, res) => {
     from: "ks7997067@gmail.com",
     to: email,
     subject: "Sample Email Subject",
-    text: `  http://localhost:5173/resetPassword/${user._id}?token=${token}`,
+    text: `https://delightful-biscuit-e75381.netlify.app/resetPassword/${user._id}?token=${token}`,
   };
   try {
     await transporter.sendMail(mailOptions);
