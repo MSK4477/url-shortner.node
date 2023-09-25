@@ -1,6 +1,6 @@
 import { Router } from "express";
 import UrlModel from "../database/urlModel.js";
-import { nanoid } from "nanoid";
+import { v4 } from "uuid";
 import validateUrl from "./validUrl.js"
 const urlRouter = Router();
 
@@ -8,7 +8,7 @@ const urlRouter = Router();
 urlRouter.post("/short", async (req, res) => {
   const { origUrl } = req.body;
 
-  const urlId = nanoid();
+  const urlId = v4();
   if (validateUrl(origUrl)) {
 
   try {
