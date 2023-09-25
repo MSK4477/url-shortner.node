@@ -14,7 +14,7 @@ urlRouter.post("/short", async (req, res) => {
   try {
     let url = await UrlModel.findOne({ origUrl });
 
-    if (url) {
+    if (url) {      
       res.json(url);
     } else {
       const shortUrl = `http://localhost:5173/rd/${urlId}`;
