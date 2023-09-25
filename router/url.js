@@ -41,8 +41,7 @@ urlRouter.post("/short", async (req, res) => {
 urlRouter.get("/short/:urlId", async (req, res) => {
   const { urlId } = req.params;
   const url = await UrlModel.findOne({urlId })
- console.log(  "this is full data", url)
- console.log("this is urlid bro", urlId)
+
 try{
  res.status(200).json({UrlData:url});
 if (url) {
