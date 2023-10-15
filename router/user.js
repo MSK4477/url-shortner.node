@@ -59,7 +59,7 @@ console.log(email,isUserExist)
       to: email,
       subject: "Verify Your Email",
      html:`<h1>Hello There</h1>
-     <p>Please Verify Your Email BY Clicking The Link Below..</p>
+     <p>Please Verify Your Email By Clicking The Link Below..</p>
      <p>The Link Expires In 30 Min</p>
      <a href=${link}>${link}</a>
      `
