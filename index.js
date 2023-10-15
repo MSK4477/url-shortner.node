@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cookieParser());
 dotenv.config()
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "https://resplendent-cupcake-505e71.netlify.app",
     credentials: true,
   }))
 
