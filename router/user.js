@@ -24,9 +24,11 @@ userRouter.get("/", async (req, res) => {
 userRouter.post("/register", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log("email",email)
+    console.log("password",password)
     const hashedPassword = await bcrypt.hash(password, 10);
     const isUserExist = await User.findOne({ email: email });
-console.log(email,isUserExist)
+console.log("is user",isUserExist)
     if (isUserExist) {
       res.status(409).json({ message: "User already exists" });
       return;
@@ -52,10 +54,12 @@ console.log(email,isUserExist)
         user: process.env.GMAIL_USER,
         pass: process.env.GMAIL_PASSWORD,
       },
+      
     });
+    console.log(dotenv.config())
 
     const mailOptions = {
-      from:process.env.GMAIL_USER ,
+      from:process.env.GMAIL_USER,
       to: email,
       subject: "Verify Your Email",
      html:`<h1>Hello There</h1>
@@ -166,7 +170,7 @@ userRouter.post("/forgotPassword", async (req, res) => {
 const  link = `https://resplendent-cupcake-505e71.netlify.app/resetPassword/${user._id}?token=${token}`;
 
   const mailOptions = {
-    from: process.GMAIL_USER,
+    from: process.env.GMAIL_USER,
     to: email,
     subject: "reset password",
     html:`<h1>Hello ${user.firstName}</h1>
