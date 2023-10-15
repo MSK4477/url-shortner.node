@@ -56,7 +56,6 @@ console.log("is user",isUserExist)
       },
       
     });
-    console.log(dotenv.config())
 
     const mailOptions = {
       from:process.env.GMAIL_USER,
