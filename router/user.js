@@ -42,7 +42,7 @@ console.log(email,isUserExist)
     await newUserData.save();
 
     const verifyToken = jwt.sign({ email: email },  "jwt_secret_key", {
-      expiresIn: "1d",
+      expiresIn: "30m",
     });
 
     const link = `https://delightful-biscuit-e75381.netlify.app/verify?token=${verifyToken}`;
@@ -55,10 +55,14 @@ console.log(email,isUserExist)
     });
 
     const mailOptions = {
-      from: "your-email@example.com",
+      from: "ks7997067@gmail.com",
       to: email,
       subject: "Verify Your Email",
-      text: `Click the following link to verify your email: ${link}`,
+     html:`<h1>Hello ${isUserExist.name}</h1>
+     <p>Please Verify Your Email BY Clicking The Link Below..</p>
+     <p>The Link Expires In 30 Min</p>
+     <a href=${link}>${link}</a>
+     `
     };
 
     await transporter.sendMail(mailOptions);
@@ -105,37 +109,34 @@ userRouter.get("/verify", async (req, res) => {
 });
 
 userRouter.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
   try {
-    const user = await User.findOne({ email: email });
+    const { email, password } = req.body;
+console.log(email, password)
+    const existingUser = await User.findOne({ email: email });
+console.log("exUser",existingUser)
+    if (existingUser) {
+      const isValidUser = await bcrypt.compare(
+        password,
+        existingUser.password
+      );
+console.log(isValidUser)
+      if (isValidUser) {
 
-    if (!user || !user.isVerified) {
-      res.status(404).json({
-        code: -1,
-        message: "Login failed. User not found or User Not Verified.",
-      });
-      return;
+        res.cookie("aToken", email, { expire: new Date() + 86400000 });
+        return res.status(201).send({
+          message: "User has been signed-in successfully.",
+        });
+      }
+      return res.status(401).send({ message: "Invalid Credentials." });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (!isPasswordValid) {
-      res
-        .status(401)
-        .json({ code: 0, message: "Login failed. Invalid password." });
-      return;
-    }
-
-    res.status(200).json({
-      message: " User Loggedin successfully",
-      id: user.id,
-      name: user.name,
-      email: user.email,
+    return res.status(400).send({
+      message: "User does not exist",
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).send({
+      message: "Internal Server Error",
+    });
   }
 });
 
@@ -148,7 +149,7 @@ userRouter.post("/forgotPassword", async (req, res) => {
   }
 
   const token = jwt.sign({ id: user._id }, "jwt_secret_key", {
-    expiresIn: "1d",
+    expiresIn: "30",
   });
 
   user.randomToken = token;
@@ -161,11 +162,18 @@ userRouter.post("/forgotPassword", async (req, res) => {
       pass: process.env.GMAIL_PASSWORD,
     },
   });
+
+const  link = `https://delightful-biscuit-e75381.netlify.app/resetPassword/${user._id}?token=${token}`;
+
   const mailOptions = {
     from: "ks7997067@gmail.com",
     to: email,
-    subject: "Sample Email Subject",
-    text: `https://delightful-biscuit-e75381.netlify.app/resetPassword/${user._id}?token=${token}`,
+    subject: "reset password",
+    html:`<h1>Hello ${user.name}</h1>
+    <p>Reset The Password BY Clicking The Link Below..</p>
+    <p>The Link Expires In 30 Min</p>
+    <a href=${link}>${link}</a>
+    `
   };
   try {
     await transporter.sendMail(mailOptions);
