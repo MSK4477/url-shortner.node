@@ -45,7 +45,7 @@ console.log(email,isUserExist)
       expiresIn: "30m",
     });
 
-    const link = `https://resplendent-cupcake-505e71.netlify.app//verify?token=${verifyToken}`;
+    const link = `https://resplendent-cupcake-505e71.netlify.app/verify?token=${verifyToken}`;
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -163,7 +163,7 @@ userRouter.post("/forgotPassword", async (req, res) => {
     },
   });
 
-const  link = `https://resplendent-cupcake-505e71.netlify.app//resetPassword/${user._id}?token=${token}`;
+const  link = `https://resplendent-cupcake-505e71.netlify.app/resetPassword/${user._id}?token=${token}`;
 
   const mailOptions = {
     from: "ks7997067@gmail.com",
