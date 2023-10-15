@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(cookieParser());
 dotenv.config()
 app.use(cors())
-console.log(dotenv.config())
+// console.log(dotenv.config())
 
 app.get("/", (req, res) =>{
     res.status(200).json({message:"welcome"})
