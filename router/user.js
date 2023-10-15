@@ -170,7 +170,7 @@ const  link = `https://delightful-biscuit-e75381.netlify.app/resetPassword/${use
     to: email,
     subject: "reset password",
     html:`<h1>Hello ${user.firstName}</h1>
-    <p>Reset The Password BY Clicking The Link Below..</p>
+    <p>Reset The Password By Clicking The Link Below..</p>
     <p>The Link Expires In 30 Min</p>
     <a href=${link}>${link}</a>
     `
