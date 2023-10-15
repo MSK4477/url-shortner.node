@@ -58,7 +58,7 @@ console.log(email,isUserExist)
       from:process.env.GMAIL_USER ,
       to: email,
       subject: "Verify Your Email",
-     html:`<h1>Hello ${isUserExist.name}</h1>
+     html:`<h1>Hello There</h1>
      <p>Please Verify Your Email BY Clicking The Link Below..</p>
      <p>The Link Expires In 30 Min</p>
      <a href=${link}>${link}</a>
