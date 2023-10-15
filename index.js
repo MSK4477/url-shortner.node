@@ -4,16 +4,16 @@ import dbToConnect from "./database/mongoose_connection.js"
 import cookieParser from "cookie-parser"
 import userRouter from "./router/user.js"
 import urlRouter from "./router/url.js"
-
+import dotenv from "dotenv"
 await dbToConnect()
 
 const app = express()
 
 app.use(express.json())
 app.use(cookieParser());
-
+dotenv.config()
 app.use(cors({
-    origin: "https://resplendent-cupcake-505e71.netlify.app",
+    origin: process.env.FRONTEND_URL,
     credentials: true,
   }))
 
