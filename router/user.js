@@ -122,7 +122,7 @@ console.log("exUser",existingUser)
 console.log(isValidUser)
       if (isValidUser) {
 
-        res.cookie("aToken", email, { expire: new Date() + 86400000 });
+        // res.cookie("aToken", email, { expire: new Date() + 86400000 });
         return res.status(201).send({
           message: "User has been signed-in successfully.",
         });

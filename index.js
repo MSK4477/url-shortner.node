@@ -12,10 +12,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser());
 dotenv.config()
-app.use(cors({
-    origin: "https://resplendent-cupcake-505e71.netlify.app",
-    credentials: true,
-  }))
+app.use(cors())
 
 app.get("/", (req, res) =>{
     res.status(200).json({message:"welcome"})
