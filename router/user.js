@@ -55,7 +55,7 @@ console.log(email,isUserExist)
     });
 
     const mailOptions = {
-      from: "ks7997067@gmail.com",
+      from:process.env.GMAIL_USER ,
       to: email,
       subject: "Verify Your Email",
      html:`<h1>Hello ${isUserExist.name}</h1>
@@ -166,7 +166,7 @@ userRouter.post("/forgotPassword", async (req, res) => {
 const  link = `https://resplendent-cupcake-505e71.netlify.app/resetPassword/${user._id}?token=${token}`;
 
   const mailOptions = {
-    from: "ks7997067@gmail.com",
+    from: process.GMAIL_USER,
     to: email,
     subject: "reset password",
     html:`<h1>Hello ${user.firstName}</h1>
